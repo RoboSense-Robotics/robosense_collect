@@ -1,0 +1,439 @@
+vehicle_alias: Guangqi-001
+vehicle_id: LNABLAB38N5508070
+calib_update_time: "2023/11/05/11-56-47"
+car_info:
+    length: 4.835
+    width: 1.935
+    height: 1.685
+    rear_axle_to_center: 1.483
+sensors: # 传感器信息，含标定信息
+    lidar:
+        - topic: "/lidar_tm_ruby_plus/rslidar_scans"
+          calibration:
+              update_date: "2023/02/24"
+              frame: "lidar_tm_ruby_plus"
+              base_link: "vehicle"
+              euler_convention: "R=Rz*Ry*Rx"
+              x: 1.227
+              y: 0
+              z: 1.996841
+              roll: -0.001527999876998365
+              pitch: 0.006435000289203718
+              yaw: 1.545505046844482
+        - topic: "/lidar_tm_m1p/rslidar_scans"
+          calibration:
+              update_date: "2023/02/24"
+              frame: "lidar_tm_m1p"
+              base_link: "vehicle"
+              euler_convention: "R=Rz*Ry*Rx"
+              x: 1.5404114
+              y: -0.04476024
+              z: 1.7591988
+              roll: -0.01219043
+              pitch: 0.00517598
+              yaw: -0.0113618
+        - topic: "/lidar_fm_bp/rslidar_scans"
+          calibration:
+              update_date: "2023/02/24"
+              frame: "lidar_fm_bp"
+              base_link: "vehicle"
+              euler_convention: "R=Rz*Ry*Rx"
+              x: 0
+              y: 0
+              z: 0
+              roll: 0
+              pitch: 0
+              yaw: 0
+        - topic: "/lidar_lm_bp/rslidar_scans"
+          calibration:
+              update_date: "2023/02/24"
+              frame: "lidar_lm_bp"
+              base_link: "vehicle"
+              euler_convention: "R=Rz*Ry*Rx"
+              x: 0
+              y: 0
+              z: 0
+              roll: 0
+              pitch: 0
+              yaw: 0
+        - topic: "/lidar_rm_bp/rslidar_scans"
+          calibration:
+              update_date: "2023/02/24"
+              frame: "lidar_rm_bp"
+              base_link: "vehicle"
+              euler_convention: "R=Rz*Ry*Rx"
+              x: 0
+              y: 0
+              z: 0
+              roll: 0
+              pitch: 0
+              yaw: 0
+        - topic: "/lidar_bm_bp/rslidar_scans"
+          calibration:
+              update_date: "2023/02/24"
+              frame: "lidar_bm_bp"
+              base_link: "vehicle"
+              euler_convention: "R=Rz*Ry*Rx"
+              x: 0
+              y: 0
+              z: 0
+              roll: 0
+              pitch: 0
+              yaw: 0
+    camera:
+        - topic: "/camera_fm_fisheye/image_color/compressed"
+          calibration:
+              update_date: "2023/11/26"
+              frame: "camera_fm_fisheye"
+              base_link: "vehicle"
+              euler_convention: "R=Rz*Ry*Rx"
+              type: "original"
+              CameraExt:
+                  x: 3.891
+                  y: -0.206
+                  z: 0.8081
+                  roll: -2.2373
+                  pitch: -0.0
+                  yaw: -1.6326
+              CameraIntMat: [507.8312300842876, 0.0, 956.0108478835156, 0.0, 507.5940862287766, 774.3996375222131, 0.0, 0.0, 1.0]
+              DistCoeff: [0.13445081000392703, -0.03415083099257455, -0.0014898469242030222, 0.0008572528063649723]
+              ImageSize: [1920, 1536]
+          time_compensation: 0.073
+          time_compensation_checked: false
+        - topic: "/camera_fm_fisheye/image_color/compressed"
+          calibration:
+              update_date: "2023/11/26"
+              frame: "camera_fm_fisheye"
+              base_link: "vehicle"
+              euler_convention: "R=Rz*Ry*Rx"
+              type: "unfold"
+              CameraExt:
+                  x: 0.0347
+                  y: 0.8081
+                  z: -3.8963
+                  roll: -1.5708
+                  pitch: 0.0
+                  yaw: -1.6326
+              CameraIntMat: [611.1549814728781, 0.0, 960.0, 0.0, 611.1549814728781, 448.0, 0.0, 0.0, 1.0]
+              DistCoeff: [0.0, 0.0, 0.0, 0.0]
+              ImageSize: [1920, 1408]
+          time_compensation: 0.073
+          time_compensation_checked: false
+        - topic: "/camera_bm_fisheye/image_color/compressed"
+          calibration:
+              update_date: "2023/11/26"
+              frame: "camera_bm_fisheye"
+              base_link: "vehicle"
+              euler_convention: "R=Rz*Ry*Rx"
+              type: "original"
+              CameraExt:
+                  x: -0.938
+                  y: -0.091
+                  z: 1.0139
+                  roll: -1.9974
+                  pitch: -0.0157
+                  yaw: 1.6205
+              CameraIntMat: [508.848909987226, 0.0, 949.255337379865, 0.0, 502.560208382606, 741.79545696306, 0.0, 0.0, 1.0]
+              DistCoeff: [0.137783740555972, -0.035806629735142, -0.000659422646092834, 0.000656277569282243]
+              ImageSize: [1920, 1536]
+          time_compensation: 0.073
+          time_compensation_checked: false
+        - topic: "/camera_bm_fisheye/image_color/compressed"
+          calibration:
+              update_date: "2023/11/26"
+              frame: "camera_bm_fisheye"
+              base_link: "vehicle"
+              euler_convention: "R=Rz*Ry*Rx"
+              type: "unfold"
+              CameraExt:
+                  x: 0.0443
+                  y: 1.0139
+                  z: -0.9414
+                  roll: -1.5708
+                  pitch: 0.0
+                  yaw: 1.6205
+              CameraIntMat: [611.1549814728781, 0.0, 960.0, 0.0, 611.1549814728781, 448.0, 0.0, 0.0, 1.0]
+              DistCoeff: [0.0, 0.0, 0.0, 0.0]
+              ImageSize: [1920, 1408]
+          time_compensation: 0.073
+          time_compensation_checked: false
+        - topic: "/camera_lb_pinhole/image_color/compressed"
+          calibration:
+              update_date: "2023/04/24"
+              frame: "camera_lb_pinhole"
+              base_link: "vehicle"
+              euler_convention: "R=Rz*Ry*Rx"
+              type: "original"
+              CameraExt:
+                  x: 2.44900607
+                  y: 0.98829774
+                  z: 0.98397676
+                  roll: -1.57911967
+                  pitch: 0.00712604
+                  yaw: 0.84461933
+              CameraIntMat: [1427.632431664404, 0.0, 1424.8756226318446, 0.0, 1408.6387750624733, 911.5818283540656, 0.0, 0.0, 1.0]
+              DistCoeff: [7.195076575677292, 5.854589678303159, -0.00015179964025932469, -0.00019485440199086898, 0.5044996667683285, 7.505535894940562, 8.02039132479358, 1.7467716519171828]
+              ImageSize: [2880, 1860]
+          time_compensation: 0.033
+          time_compensation_checked: false
+        - topic: "/camera_rb_pinhole/image_color/compressed"
+          calibration:
+              update_date: "2023/11/19"
+              frame: "camera_rb_pinhole"
+              base_link: "vehicle"
+              euler_convention: "R=Rz*Ry*Rx"
+              type: "original"
+              CameraExt:
+                  x: 2.409
+                  y: -0.998
+                  z: 1.0611
+                  roll: -1.5336
+                  pitch: -0.0075
+                  yaw: 2.3269
+              CameraIntMat: [1424.5406785565626, 0.0, 1407.8407298060945, 0.0, 1406.7752116603422, 896.0815823589683, 0.0, 0.0, 1.0]
+              DistCoeff: [2.838594532162211, 0.11683928193837903, -5.811928142551101e-05, -0.0004800384108782076, -0.10193736893714932, 3.1529921655846196, 0.9040581440570663, -0.21800263045373128]
+              ImageSize: [2880, 1860]
+          time_compensation: 0.033
+          time_compensation_checked: false
+        - topic: "/camera_rf_pinhole/image_color/compressed"
+          calibration:
+              update_date: "2023/09/04"
+              frame: "camera_rf_pinhole"
+              base_link: "vehicle"
+              euler_convention: "R=Rz*Ry*Rx"
+              type: "original"
+              CameraExt:
+                  x: 2.504
+                  y: -1.005
+                  z: 1.015
+                  roll: -1.6169
+                  pitch: -0.007
+                  yaw: -2.6068
+              CameraIntMat: [1427.1283812646873, 0.0, 1471.2801755900848, 0.0, 1408.3493790778289, 948.5603002843682, 0.0, 0.0, 1.0]
+              DistCoeff: [1.3912589838880645, 0.9904782491264869, -0.00040114037346344373, -0.0005988195951042018, 0.09494700856298818, 1.705397245408062, 1.3502941935103296, 0.3183947997917961]
+              ImageSize: [2880, 1860]
+          time_compensation: 0.033
+          time_compensation_checked: false
+        - topic: "/camera_lf_pinhole/image_color/compressed"
+          calibration:
+              update_date: "2023/09/04"
+              frame: "camera_lf_pinhole"
+              base_link: "vehicle"
+              euler_convention: "R=Rz*Ry*Rx"
+              type: "original"
+              CameraExt:
+                  x: 2.542
+                  y: 0.956
+                  z: 0.979
+                  roll: -1.5862
+                  pitch: 0.0004
+                  yaw: -0.5555
+              CameraIntMat: [1426.3874094196933, 0.0, 1431.060608339146, 0.0, 1408.4837541484364, 872.9999047244313, 0.0, 0.0, 1.0]
+              DistCoeff: [0.65011824775074, -0.7542063265304568, 0.00021567365472706902, -0.00021503030963109, -0.10458206696465441, 0.9676177866025839, -0.6489760260138263, -0.32379617484305306]
+              ImageSize: [2880, 1860]
+          time_compensation: 0.033
+          time_compensation_checked: false
+        - topic: "/camera_rm_fisheye/image_color/compressed"
+          calibration:
+              update_date: "2023/04/24"
+              frame: "camera_rm_fisheye"
+              base_link: "vehicle"
+              euler_convention: "R=Rz*Ry*Rx"
+              type: "original"
+              CameraExt:
+                  x: 2.46162201
+                  y: -1.01198079
+                  z: 0.95457061
+                  roll: -2.08248382
+                  pitch: 0.00449795
+                  yaw: -3.13569961
+              CameraIntMat: [509.738736937889, 0.0, 959.387987728502, 0.0, 503.725702340783, 746.806511201839, 0.0, 0.0, 1.0]
+              DistCoeff: [0.133448295306047, -0.0324979801959095, -0.00326647871682191, 0.00129454838355311]
+              ImageSize: [1920, 1536]
+          time_compensation: 0.073
+          time_compensation_checked: false
+        - topic: "/camera_rm_fisheye/image_color/compressed"
+          calibration:
+              update_date: "2023/04/24"
+              frame: "camera_rm_fisheye"
+              base_link: "vehicle"
+              euler_convention: "R=Rz*Ry*Rx"
+              type: "unfold"
+              CameraExt:
+                  x: 2.46162201
+                  y: -1.01198079
+                  z: 0.95457061
+                  roll: -1.57079633
+                  pitch: 0.0
+                  yaw: -3.13569961
+              CameraIntMat: [611.1549814728781, 0.0, 960.0, 0.0, 611.1549814728781, 448.0, 0.0, 0.0, 1.0]
+              DistCoeff: [0.0, 0.0, 0.0, 0.0]
+              ImageSize: [1920, 1408]
+          time_compensation: 0.073
+          time_compensation_checked: false
+        - topic: "/camera_lm_fisheye/image_color/compressed"
+          calibration:
+              update_date: "2023/08/28"
+              frame: "camera_lm_fisheye"
+              base_link: "vehicle"
+              euler_convention: "R=Rz*Ry*Rx"
+              type: "original"
+              CameraExt:
+                  x: 2.435
+                  y: 1.009
+                  z: 0.992
+                  roll: -2.0963
+                  pitch: 0.0108
+                  yaw: 0.0143
+              CameraIntMat: [509.915996870305, 0.0, 925.358484041234, 0.0, 504.099442442032, 752.952210786696, 0.0, 0.0, 1.0]
+              DistCoeff: [0.138057792120377, -0.0360912761354773, -0.000650039271916317, 0.000675784191601917]
+              ImageSize: [1920, 1536]
+          time_compensation: 0.073
+          time_compensation_checked: false
+        - topic: "/camera_lm_fisheye/image_color/compressed"
+          calibration:
+              update_date: "2023/08/28"
+              frame: "camera_lm_fisheye"
+              base_link: "vehicle"
+              euler_convention: "R=Rz*Ry*Rx"
+              type: "unfold"
+              CameraExt:
+                  x: -2.4492
+                  y: 0.992
+                  z: -0.974
+                  roll: -1.5708
+                  pitch: 0.0
+                  yaw: 0.0143
+              CameraIntMat: [611.1549814728781, 0.0, 960.0, 0.0, 611.1549814728781, 448.0, 0.0, 0.0, 1.0]
+              DistCoeff: [0.0, 0.0, 0.0, 0.0]
+              ImageSize: [1920, 1408]
+              OriginalCameraIntMat: [509.915996870305, 0.0, 925.358484041234, 0.0, 504.099442442032, 752.952210786696, 0.0, 0.0, 1.0]
+              OriginalDistCoeff: [0.138057792120377, -0.0360912761354773, -0.000650039271916317, 0.000675784191601917]
+              OriginalImageSize: [1920, 1536]
+          time_compensation: 0.073
+          time_compensation_checked: false
+        - topic: "/camera_fm_wide/image_color/compressed"
+          calibration:
+              update_date: "2023/11/26"
+              frame: "camera_fm_wide"
+              base_link: "vehicle"
+              euler_convention: "R=Rz*Ry*Rx"
+              type: "original"
+              CameraExt:
+                  x: 1.565
+                  y: -0.219
+                  z: 1.708
+                  roll: -1.5675
+                  pitch: -0.0079
+                  yaw: -1.591
+              CameraIntMat: [1418.4650010770104, 0.0, 1431.7197752771108, 0.0, 1416.5658934163682, 895.4886119839639, 0.0, 0.0, 1.0]
+              DistCoeff: [0.4910256249312531, -0.2665084119131646, -0.0001330277322328693, -0.00021408465152793167, -0.02563078075436892, 0.8074516429855421, -0.20602902577382742, -0.09491379587477483, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+              ImageSize: [2880, 1860]
+          time_compensation: 0.038
+          time_compensation_checked: false
+        - topic: "/camera_fm_narrow/image_color/compressed"
+          calibration:
+              update_date: "2023/04/24"
+              frame: "camera_fm_narrow"
+              base_link: "vehicle"
+              euler_convention: "R=Rz*Ry*Rx"
+              type: "original"
+              CameraExt:
+                  x: 1.5344268
+                  y: 0.16067804
+                  z: 1.73906282
+                  roll: -1.55837124
+                  pitch: -0.000307223864
+                  yaw: -1.58432017
+              CameraIntMat: [5152.5057061652315, 0.0, 1431.953063664244, 0.0, 5086.16008801643, 868.8842060736855, 0.0, 0.0, 1.0]
+              DistCoeff: [-0.18843928428525888, -0.3538616894238872, -0.00042415977104602186, 0.00046689461041996266, 4.895034387726487]
+              ImageSize: [2880, 1860]
+          time_compensation: 0.033
+          time_compensation_checked: false
+        - topic: "/camera_bm_pinhole/image_color/compressed"
+          calibration:
+              update_date: "2023/11/19"
+              frame: "camera_bm_pinhole"
+              base_link: "vehicle"
+              euler_convention: "R=Rz*Ry*Rx"
+              type: "original"
+              CameraExt:
+                  x: -0.263
+                  y: 0.031
+                  z: 1.509
+                  roll: -1.6364
+                  pitch: 0.0171
+                  yaw: 1.5987
+              CameraIntMat: [2646.378260956328, 0.0, 1423.0960727722863, 0.0, 2611.0196960180538, 932.6941812737891, 0.0, 0.0, 1.0]
+              DistCoeff: [9.748125202046783, 8.080544116930547, -0.00041462352183742573, -0.001008867762207896, 25.787136693743907, 10.076402499562748, 11.280098482169082, 35.215469207986196]
+              ImageSize: [2880, 1860]
+          time_compensation: 0.033
+          time_compensation_checked: false
+    rtk:
+          imu_topic: "/ins/imu"
+          odom_topic: "/ins/odom"
+          gps_topic: "/ins/gps"
+          calibration:
+              update_date: "2023/04/21"
+              frame: "rtk"
+              base_link: "vehicle"
+              euler_convention: "R=Rz*Ry*Rx"
+              x: 1.23
+              y: 0.00
+              z: 1.70
+              roll: 0
+              pitch: 0
+              yaw: 0
+    can:
+          topic: "/can_data"
+          vel_offset: 0.0
+          vel_ratio: 1.012236849
+    imu:
+        - topic: "/ins/raw"
+          model: "qinji_gi7683"
+          calibration:
+              update_date: "2024/1/9"
+              base_link: "rear_axle_center"
+              frame: "imu"
+              euler_convention: "R=Rz*Ry*Rx"
+              gravity: 9.801
+              x: 1.23
+              y: 0.00
+              z: 1.34
+              roll: 0
+              pitch: 0
+              yaw: 0
+    gnss:
+        - topic: "/ins/raw"
+          model: "qinji_gi7683"
+          calibration:
+              update_date: "2024/1/9"
+              base_link: "rear_axle_center"
+              frame: "gnss"
+              euler_convention: "R=Rz*Ry*Rx"
+              x: 1.37
+              y: 0.54
+              z: 1.39
+              roll: 0.0
+              pitch: 0.0
+              yaw: 0.0
+    chassis:
+        - topic: "/can_data"
+          calibration:
+              update_date: "2024/1/9"
+              base_link: "vehicle"
+              frame: "chassis"
+              euler_convention: "R=Rz*Ry*Rx"
+              rear_left_encoder_m_per_plus: 0.0268
+              rear_right_encoder_m_per_plus: 0.0268
+tf:
+    - frame: "rear_axle_center"
+      update_date: "2023/12/21"
+      base_link: "vehicle"
+      euler_convention: "R=Rz*Ry*Rx"
+      x: 0.0
+      y: 0.0
+      z: 0.36
+      roll: 0.0
+      pitch: 0.0
+      yaw: 0.0

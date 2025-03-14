@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format2.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>ros2_collect</name>
+  <version>0.15.13</version>
+  <description>Robosense ROS Collect Softeware</description>
+  <maintainer email="swhe@robosense.cn">Michael Orlov</maintainer>
+  <license>Apache License 2.0</license>
+
+  <!-- ROS2 dependency -->
+  <buildtool_depend condition="$ROS_VERSION == 2">ament_cmake_ros</buildtool_depend>
+  <depend condition="$ROS_VERSION == 2">rclcpp</depend>
+  <depend condition="$ROS_VERSION == 2">rosbag2_compression</depend>
+  <depend condition="$ROS_VERSION == 2">rosbag2_cpp</depend>
+  <depend condition="$ROS_VERSION == 2">rosbag2_interfaces</depend>
+  <depend condition="$ROS_VERSION == 2">rosbag2_storage</depend>
+  <depend condition="$ROS_VERSION == 2">rosbag2_transport</depend>
+  <depend condition="$ROS_VERSION == 2">shared_queues_vendor</depend>
+  <depend condition="$ROS_VERSION == 2">rmw</depend>
+  <depend condition="$ROS_VERSION == 2">keyboard_handler</depend>
+  <depend condition="$ROS_VERSION == 2">yaml_cpp_vendor</depend>
+
+  <test_depend condition="$ROS_VERSION == 2">test_msgs</test_depend>
+  <test_depend condition="$ROS_VERSION == 2">ament_cmake_gmock</test_depend>
+  <test_depend condition="$ROS_VERSION == 2">ament_index_cpp</test_depend>
+  <test_depend condition="$ROS_VERSION == 2">ament_lint_auto</test_depend>
+  <test_depend condition="$ROS_VERSION == 2">ament_lint_common</test_depend>
+  <test_depend condition="$ROS_VERSION == 2">rmw_implementation_cmake</test_depend>
+  <test_depend condition="$ROS_VERSION == 2">rosbag2_compression_zstd</test_depend>
+  <test_depend condition="$ROS_VERSION == 2">rosbag2_test_common</test_depend>
+  <test_depend condition="$ROS_VERSION == 2">rosbag2_storage_default_plugins</test_depend>
+
+  <!-- ROS1 dependency -->
+  <buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend>
+  <depend condition="$ROS_VERSION == 1">roscpp</depend>
+  <depend condition="$ROS_VERSION == 1">rosbag</depend>
+  <depend condition="$ROS_VERSION == 1">tf2</depend>
+  <depend condition="$ROS_VERSION == 1">tf2_ros</depend>
+
+  <!-- common dependency -->
+  <depend condition="$ROS_VERSION == 1">yaml-cpp</depend>
+  <depend>std_msgs</depend>
+  <depend>robosense_msgs</depend>
+  <depend>nlohmann-json-dev</depend>
+
+  <export>
+    <build_type condition="$ROS_VERSION == 1">catkin</build_type>
+    <build_type condition="$ROS_VERSION == 2">ament_cmake</build_type>
+  </export>
+</package>

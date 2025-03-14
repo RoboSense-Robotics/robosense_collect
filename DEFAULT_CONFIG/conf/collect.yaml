@@ -1,0 +1,77 @@
+recordappcarconfig:
+    timeout_ms: 604800000
+    heartbeat_ms: 5000
+    enable_debug: true
+recordsensorconfig:
+    record_sensors:
+        - sensor_type: "RS_RECORD_DATA_ANY"
+          enable_topic: true
+          topic_name: "/rs_lidar/points"
+          clip_rel_directory: ""
+          record_file_name: "datas"
+          enable_timeout_check: false
+          timeout_warn_th_ms: 300
+          timeout_error_th_ms: 500
+        - sensor_type: "RS_RECORD_DATA_H265"
+          enable_topic: true
+          topic_name: "/rs_camera/compressed"
+          clip_rel_directory: ""
+          record_file_name: "datas"
+          enable_timeout_check: false
+          timeout_warn_th_ms: 300
+          timeout_error_th_ms: 500
+        - sensor_type: "RS_RECORD_DATA_ANY"
+          enable_topic: true
+          topic_name: "/rs_imu"
+          clip_rel_directory: ""
+          record_file_name: "datas"
+          enable_timeout_check: false
+          timeout_warn_th_ms: 300
+          timeout_error_th_ms: 500
+        - sensor_type: "RS_RECORD_DATA_ANY"
+          enable_topic: true
+          topic_name: "/diagnostics"
+          clip_rel_directory: ""
+          record_file_name: "datas"
+          enable_timeout_check: false
+          timeout_warn_th_ms: 300
+          timeout_error_th_ms: 500          
+recorddataconfig:
+    segment_type: "RS_RECROD_SEGMENT_NO_SEG" # "RS_RECORD_SEGMENT_BY_TIME"/"RS_RECROD_SEGMENT_NO_SEG"
+    enable_no_segment_inner_seg: true  
+    no_segment_inner_segment_time_th_ms: 30000
+    segment_time_th_ms: 30000
+    serialization_format: "cdr"
+    storage_id: "sqlite3" # "sqlite3"/"mcap" 
+    storage_cache_size: 16777216
+    enable_compression: false 
+    compression_mode: "message" # "message"/"file"
+    compression_format: "zstd" # "zstd"/"fake_comp"
+    compression_quene_size: 50
+    compression_thread_cnt: 1
+    compression_exclude_records:
+        - clip_rel_directory: ""
+          record_file_name: "datas"
+    enable_clip_erase_timeout_debug: false
+    clip_erase_timeout_debug_count: 0
+    rdcs_root_directory_path: "/tmp/RDCS_ROOT/"
+    enable_collect_freespace_monitor: true
+    collect_freespace_min_gbyte: 32
+    enable_collect_disk_mount_monitor: true
+    collect_disk_write_check_modes:
+        - "RS_COLLECT_DISK_WRITE_CHECK_USR"
+    enable_disk_mount_retry_debug: false
+    enable_disk_mount_retry: false
+    max_disk_mount_retry_cnt: 2
+    encoder_type: H265
+recordmetaconfig:
+    template_meta_directory_path: "/media/sti/ee28dfb8-da74-4739-88ab-b2b836e8b78c/super_workspace/super_sensor_sdk_ros2/modules/ros2_collect/DEFAULT_CONFIG/META/"
+recordsystemconfig:
+    vehicle_id: "LNABLAB38N5508070" # lixiang one 001
+    clip_id: 0
+    task_name: ""
+    task_name_add_timestamp: true
+recordcollectconfig:
+    is_auto_collect: true
+    is_use_sim: false
+    is_discovery_disabled: false

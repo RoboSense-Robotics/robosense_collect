@@ -1,0 +1,1 @@
+#include "modules/rs_collect/rsrecordclipchannel.h"
