@@ -1,6 +1,6 @@
 /************************************************************
  * Copyright 2025 RoboSense Technology Co., Ltd
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
 ***************************************************************/
 #ifndef RSRECORDCLIPMANAGER_H
 #define RSRECORDCLIPMANAGER_H
@@ -56,10 +56,10 @@ public:
 public:
   RSRecordSingleMessage() { reset(); }
 
-  RSRecordSingleMessage(
-      const std::string &topic_name, const std::string &topic_type,
-      const ros_time_t  &message_time,
-      const SerializedMessagePtr &message) {
+  RSRecordSingleMessage(const std::string &topic_name,
+                        const std::string &topic_type,
+                        const ros_time_t &message_time,
+                        const SerializedMessagePtr &message) {
     topic_name_ = topic_name;
     topic_type_ = topic_type;
     message_time_ = message_time;
@@ -68,10 +68,10 @@ public:
     is_h265_iframe_ = false;
   }
 
-  RSRecordSingleMessage(
-      const std::string &topic_name, const std::string &topic_type,
-      const ros_time_t  &message_time,
-      const SerializedMessage &message) {
+  RSRecordSingleMessage(const std::string &topic_name,
+                        const std::string &topic_type,
+                        const ros_time_t &message_time,
+                        const SerializedMessage &message) {
     topic_name_ = topic_name;
     topic_type_ = topic_type;
     message_time_ = message_time;
@@ -203,8 +203,7 @@ public:
   ~RSRecordFileCheckManager() {}
 
 public:
-  int init(const NodeHandlePtr pSharedNode,
-           const std::string &yamlFilePath) {
+  int init(const NodeHandlePtr pSharedNode, const std::string &yamlFilePath) {
     if (pSharedNode == nullptr) {
       return -1;
     }
@@ -232,7 +231,7 @@ public:
     if (record_file_check_infos_.find(recordFileName) !=
         record_file_check_infos_.end()) {
       RS_INFO_STREAM(pSharedNode_,
-                    "Already Add Check Record File = " << recordFileName);
+                     "Already Add Check Record File = " << recordFileName);
       return 0;
     }
 
@@ -240,10 +239,10 @@ public:
     checkInfo.setRecordFileName(recordFileName, recordRelClipDirName);
     record_file_check_infos_.insert({recordFileName, checkInfo});
 
-    RS_INFO_STREAM(pSharedNode_,
-                   "Add Check Record File: recordFileName = "
-                       << recordFileName << ", recordRelClipDirName = "
-                       << recordRelClipDirName << " Successed !");
+    RS_INFO_STREAM(pSharedNode_, "Add Check Record File: recordFileName = "
+                                     << recordFileName
+                                     << ", recordRelClipDirName = "
+                                     << recordRelClipDirName << " Successed !");
     return 0;
   }
 
@@ -274,7 +273,8 @@ public:
             false,
             RS_RECORD_FILE_CHECK_OP_TYPE::RS_RECORD_FILE_CHECK_OP_DEL_CLIP,
             RSRecordFileCheckInfo::RS_RECORD_NOT_COMPLETE_INFO);
-        RS_INFO_STREAM(pSharedNode_,
+        RS_INFO_STREAM(
+            pSharedNode_,
             "Set Record Check Info: recordFileName = "
                 << recordFileName
                 << ", status = false, "
@@ -286,7 +286,8 @@ public:
             false,
             RS_RECORD_FILE_CHECK_OP_TYPE::RS_RECORD_FILE_CHECK_OP_DEL_RECORD,
             RSRecordFileCheckInfo::RS_RECORD_ZERO_MESSAGE_COUNT_INFO);
-        RS_INFO_STREAM(pSharedNode_,
+        RS_INFO_STREAM(
+            pSharedNode_,
             "Set Record Check Info: recordFileName = "
                 << recordFileName
                 << ", status = false, "
@@ -297,7 +298,8 @@ public:
         info.setRecordCheckStatus(
             true, RS_RECORD_FILE_CHECK_OP_TYPE::RS_RECORD_FILE_CHECK_OP_NOTHING,
             RSRecordFileCheckInfo::RS_RECOED_CHECK_PASS_INFO);
-        RS_INFO_STREAM(pSharedNode_,
+        RS_INFO_STREAM(
+            pSharedNode_,
             "Set Record Check Info: recordFileName = "
                 << recordFileName
                 << ", status = true, "
@@ -307,8 +309,8 @@ public:
       }
     } else {
       RS_ERROR_STREAM(pSharedNode_,
-                     "Set Record Check Info Not Exist: record File Name = "
-                         << recordFileName);
+                      "Set Record Check Info Not Exist: record File Name = "
+                          << recordFileName);
       return -1;
     }
 
@@ -335,8 +337,8 @@ public:
                         std::ios_base::out | std::ios_base::binary);
     if (!ofstr.is_open()) {
       RS_ERROR_STREAM(pSharedNode_,
-                          "Open Yaml File = " << yaml_file_path_
-                                              << " To Write Failed !");
+                      "Open Yaml File = " << yaml_file_path_
+                                          << " To Write Failed !");
       return -2;
     }
 
@@ -347,9 +349,8 @@ public:
     ofstr.flush();
     ofstr.close();
 
-    RS_INFO_STREAM(pSharedNode_,
-                   "Write Record Info To Yaml File = " << yaml_file_path_
-                                                       << " Successed !");
+    RS_INFO_STREAM(pSharedNode_, "Write Record Info To Yaml File = "
+                                     << yaml_file_path_ << " Successed !");
     return 0;
   }
 
@@ -372,13 +373,12 @@ public:
   ~RSRecordClipManager() {
     if (is_force_finish_) {
       RS_WARN_STREAM(pSharedNode_,
-                         "is force finish: clipDirPath_ = " << clipDirPath_);
+                     "is force finish: clipDirPath_ = " << clipDirPath_);
 #if ENABLE_CLIP_MANAGER_DEBUG
       RS_INFO(pSharedNode_, "Buffer Thread Finish Clip");
-      RS_INFO_STREAM(pSharedNode_,
-                     "STATISTICAL_COUNT = " << STATISTICAL_COUNT
-                                              << ", BUFFER SIZE = "
-                                              << buffer_.size());
+      RS_INFO_STREAM(pSharedNode_, "STATISTICAL_COUNT = " << STATISTICAL_COUNT
+                                                          << ", BUFFER SIZE = "
+                                                          << buffer_.size());
 #endif // ENABLE_CLIP_MANAGER_DEBUG
       {
         buffer_cond_.notify_all();
@@ -415,7 +415,7 @@ public:
 #elif __ROS2__
            const std::unordered_map<std::string, rosbag2_storage::TopicMetadata>
 #endif
-              &topicMetaDataMapper,
+               &topicMetaDataMapper,
            const bool isInitNextClip) {
     if (pSharedGlobalConfig == nullptr) {
       return -1;
@@ -434,7 +434,7 @@ public:
     int ret = init();
     if (ret != 0) {
       RS_ERROR_STREAM(pSharedNode_,
-                          "Initial Record Clip Manager Failed: ret = " << ret);
+                      "Initial Record Clip Manager Failed: ret = " << ret);
       return -4;
     }
 
@@ -457,11 +457,10 @@ public:
                    "Clip Already Start Status: " << is_clip_already_start_);
 #if ENABLE_CLIP_MANAGER_DEBUG
     RS_INFO(pSharedNode_, "Start Finish Clip");
-    RS_INFO_STREAM(pSharedNode_,
-                   "STATISTICAL_COUNT = "
-                       << STATISTICAL_COUNT
-                       << ", BUFFER SIZE = " << buffer_.size()
-                       << ", clipDirPath_ = " << clipDirPath_);
+    RS_INFO_STREAM(pSharedNode_, "STATISTICAL_COUNT = "
+                                     << STATISTICAL_COUNT
+                                     << ", BUFFER SIZE = " << buffer_.size()
+                                     << ", clipDirPath_ = " << clipDirPath_);
 #endif // ENABLE_CLIP_MANAGER_DEBUG
 
     // check duration
@@ -503,32 +502,31 @@ public:
     int ret = isRemoveClip ? 0 : writeRecordStatistical();
     if (ret != 0) {
       RS_WARN_STREAM(pSharedNode_,
-                         "write record statistical failed: ret = " << ret);
+                     "write record statistical failed: ret = " << ret);
     } else {
-      RS_INFO(pSharedNode_,
-                  "write record statistical successed !");
+      RS_INFO(pSharedNode_, "write record statistical successed !");
     }
 
     // update record file check cnt mapper
     ret = isRemoveClip ? 0 : updateRecordFileCheckCntMapper();
     if (ret != 0) {
-      RS_ERROR_STREAM(pSharedNode_,
+      RS_ERROR_STREAM(
+          pSharedNode_,
           "Update Record File Check Count Mapper Failed: ret = " << ret);
       return 0;
     } else {
       RS_INFO(pSharedNode_,
-                  "Update Record File Check Count Mapper Successed !");
+              "Update Record File Check Count Mapper Successed !");
     }
 
     // close writer thread
     if (is_writer_running_) {
 #if ENABLE_CLIP_MANAGER_DEBUG
       RS_INFO(pSharedNode_, "Buffer Thread Finish Clip");
-      RS_INFO_STREAM(pSharedNode_,
-                         "STATISTICAL_COUNT = "
-                             << STATISTICAL_COUNT
-                             << ", BUFFER SIZE = " << buffer_.size()
-                             << ", clipDirPath_ = " << clipDirPath_);
+      RS_INFO_STREAM(pSharedNode_, "STATISTICAL_COUNT = "
+                                       << STATISTICAL_COUNT
+                                       << ", BUFFER SIZE = " << buffer_.size()
+                                       << ", clipDirPath_ = " << clipDirPath_);
 #endif // ENABLE_CLIP_MANAGER_DEBUG
       {
         std::lock_guard<std::mutex> lg(buffer_mtx_);
@@ -596,8 +594,8 @@ public:
     outputChannelWriters_.clear();
 
 #if ENABLE_CLIP_MANAGER_DEBUG
-    RS_INFO_STREAM(pSharedNode_,
-                   "Close Record File(s) Finish, clipDirPath_ = " << clipDirPath_);
+    RS_INFO_STREAM(pSharedNode_, "Close Record File(s) Finish, clipDirPath_ = "
+                                     << clipDirPath_);
 #endif // ENABLE_CLIP_MANAGER_DEBUG
     if (isRemoveClip) {
       // Not Save Collect Meta Information
@@ -608,13 +606,13 @@ public:
       int ret = removeClip();
       if (ret != 0) {
         RS_ERROR_STREAM(pSharedNode_,
-                            "Remove Current Clip Failed: clip Directory Path: "
-                                << clipDirPath_ << ", ret = " << ret);
+                        "Remove Current Clip Failed: clip Directory Path: "
+                            << clipDirPath_ << ", ret = " << ret);
         return -1;
       } else {
         RS_INFO_STREAM(pSharedNode_,
-            "Remove Current Clip Successed: clip Directory Path: "
-                << clipDirPath_);
+                       "Remove Current Clip Successed: clip Directory Path: "
+                           << clipDirPath_);
       }
 
       // 条件删除时记录
@@ -629,7 +627,7 @@ public:
         int ret = pSharedCollectInfoManager_->stopInfoManager();
         if (ret != 0) {
           RS_ERROR_STREAM(pSharedNode_,
-              "Stop Collect Info Manager Failed: ret = " << ret);
+                          "Stop Collect Info Manager Failed: ret = " << ret);
           return -2;
         }
       }
@@ -638,21 +636,20 @@ public:
       int ret = writeChannelTimestamp();
       if (ret != 0) {
         RS_ERROR_STREAM(pSharedNode_,
-                            "Write ChannelTimestamp Failed: ret = " << ret);
+                        "Write ChannelTimestamp Failed: ret = " << ret);
       }
 
       // save file check info(s)
       ret = writeRecordFileCheck();
       if (ret != 0) {
         RS_ERROR_STREAM(pSharedNode_,
-                            "Write Record File Check Failed: ret= " << ret);
+                        "Write Record File Check Failed: ret= " << ret);
       }
     }
 
     is_writer_finished_ = true;
 
-    RS_INFO_STREAM(pSharedNode_,
-                   "Finish Clip: " << clipDirPath_);
+    RS_INFO_STREAM(pSharedNode_, "Finish Clip: " << clipDirPath_);
 
     return 0;
   }
@@ -661,11 +658,10 @@ public:
 
   void setIsWriterTimeout(const bool isWriterTimeout) {
     RS_WARN_STREAM(pSharedNode_,
-                   "clipDirPath_ = " << clipDirPath_
-                                     << ", isWriterTimeout = "
-                                     << isWriterTimeout
-                                     << ", is_writer_finished_ = "
-                                     << is_writer_finished_);
+                   "clipDirPath_ = "
+                       << clipDirPath_
+                       << ", isWriterTimeout = " << isWriterTimeout
+                       << ", is_writer_finished_ = " << is_writer_finished_);
     if (isWriterTimeout) {
       if (is_writer_finished_ == false) {
         is_writer_finished_ = true;
@@ -694,8 +690,8 @@ public:
                         std::ios_base::binary | std::ios_base::out);
     if (!ofstr.is_open()) {
       RS_ERROR_STREAM(pSharedNode_,
-                          "Open Clip Collect Error File: "
-                              << error_file_path << " To Write Failed !");
+                      "Open Clip Collect Error File: " << error_file_path
+                                                       << " To Write Failed !");
       return -1;
     }
 
@@ -729,7 +725,7 @@ public:
         int ret = cleanCameraH265Buffer();
         if (ret != 0) {
           RS_ERROR_STREAM(pSharedNode_,
-                              "Clear Camera H265 Buffer Failed: ret = " << ret);
+                          "Clear Camera H265 Buffer Failed: ret = " << ret);
           return -1;
         }
         is_first_frame_ = false;
@@ -742,7 +738,7 @@ public:
         int ret = addCameraH265Buffer(singleMessagePtr, isH265IFrame);
         if (ret != 0) {
           RS_ERROR_STREAM(pSharedNode_,
-                              "Add Camera H265 Buffer Failed: ret = " << ret);
+                          "Add Camera H265 Buffer Failed: ret = " << ret);
           return -2;
         }
         singleMessagePtr->is_h265_message_ = true;
@@ -753,8 +749,7 @@ public:
       buffer_.push(singleMessagePtr);
       buffer_cond_.notify_one();
 
-      const uint64_t messageTimestampNs =
-          singleMessagePtr->message_time_;
+      const uint64_t messageTimestampNs = singleMessagePtr->message_time_;
       clip_write_start_timestamp_ =
           std::min(clip_write_start_timestamp_, messageTimestampNs);
       clip_write_end_timestamp_ = messageTimestampNs;
@@ -768,10 +763,11 @@ public:
       ++STATISTICAL_COUNT;
       if (STATISTICAL_COUNT % 2000 == 0) {
         RS_INFO_STREAM(pSharedNode_,
-            "STATISTICAL_COUNT = "
-                << STATISTICAL_COUNT << ", BUFFER SIZE = " << buffer_.size()
-                << ", clipDirPath_ = " << clipDirPath_
-                << ", is_init_next_clip_ = " << is_init_next_clip_);
+                       "STATISTICAL_COUNT = "
+                           << STATISTICAL_COUNT
+                           << ", BUFFER SIZE = " << buffer_.size()
+                           << ", clipDirPath_ = " << clipDirPath_
+                           << ", is_init_next_clip_ = " << is_init_next_clip_);
       }
     }
 #endif // ENABLE_CLIP_MANAGER_DEBUG
@@ -827,15 +823,14 @@ public:
 
       ofstr.close();
     } else {
-      RS_WARN_STREAM(pSharedNode_,
-                         "open write record statistical to file: "
-                             << record_statistical_path << " failed !");
+      RS_WARN_STREAM(pSharedNode_, "open write record statistical to file: "
+                                       << record_statistical_path
+                                       << " failed !");
       return -1;
     }
 
-    RS_INFO_STREAM(pSharedNode_,
-                   "open write record statistical successed: "
-                       << record_statistical_path);
+    RS_INFO_STREAM(pSharedNode_, "open write record statistical successed: "
+                                     << record_statistical_path);
 
     return 0;
   }
@@ -856,7 +851,7 @@ private:
     if (!RSFileSystem::isDirectoryExist(clipDirPath_)) {
       if (!RSFileSystem::makePath(clipDirPath_)) {
         RS_ERROR_STREAM(pSharedNode_,
-                            "Clip Directory Path Not Exist: " << clipDirPath_);
+                        "Clip Directory Path Not Exist: " << clipDirPath_);
         return -1;
       }
     }
@@ -890,19 +885,26 @@ private:
       if (!RSFileSystem::isDirectoryExist(clipSensorDirPath)) {
         if (!RSFileSystem::makePath(clipSensorDirPath)) {
           RS_ERROR_STREAM(pSharedNode_,
-                              "Make Path clipSensorDirPath = "
-                                  << clipSensorDirPath << " Failed !");
+                          "Make Path clipSensorDirPath = " << clipSensorDirPath
+                                                           << " Failed !");
           return -3;
         }
       }
 
       const auto sensor_type = fromStringToRecordDataType(
           sensor_config["sensor_type"].as<std::string>());
+#if __ROS2__
       const std::string &clipChannelNameFilePath =
           RSFileSystem::replaceRepeatSlash(
               clipSensorDirPath + "/" +
               sensor_config["record_file_name"].as<std::string>());
-
+#elif __ROS1__
+      const std::string &clipChannelNameFilePath =
+          RSFileSystem::replaceRepeatSlash(
+              clipSensorDirPath + "/" +
+              sensor_config["record_file_name"].as<std::string>()) +
+          ".bag";
+#endif
       RSRecordClipChannel recordItemInfo;
       recordItemInfo.init(sensor_type, topic_name, clipChannelNameFilePath);
 
@@ -932,8 +934,7 @@ private:
 
       if (sensor_type == RS_RECORD_DATA_TYPE::RS_RECORD_DATA_H265) {
         camera_h265_channels_.insert(topic_name);
-        RS_INFO_STREAM(pSharedNode_,
-                       "camera h265 topic_name = " << topic_name);
+        RS_INFO_STREAM(pSharedNode_, "camera h265 topic_name = " << topic_name);
       }
     }
 
@@ -1034,12 +1035,12 @@ private:
       }
 
       RS_INFO_STREAM(pSharedNode_,
-                         "outputFilePath = " << outputFilePath
-                                             << ", enable_record_compression = "
-                                             << enable_record_compression);
+                     "outputFilePath = " << outputFilePath
+                                         << ", enable_record_compression = "
+                                         << enable_record_compression);
 #if __ROS2__
       std::shared_ptr<rosbag2_cpp::Writer> writer =
-              rosbag2_transport::ReaderWriterFactory::make_writer(
+          rosbag2_transport::ReaderWriterFactory::make_writer(
               (enable_record_compression ? compression_opts
                                          : non_compression_opts));
 #elif __ROS1__
@@ -1093,10 +1094,9 @@ private:
           writer->create_topic(topicMetaData);
 
         } catch (...) {
-          RS_ERROR_STREAM(pSharedNode_,
-                          "write channel fail, channel:"
-                              << topicMetaData.name
-                              << ", type = " << topicMetaData.type);
+          RS_ERROR_STREAM(pSharedNode_, "write channel fail, channel:"
+                                            << topicMetaData.name << ", type = "
+                                            << topicMetaData.type);
 
           return -6;
         }
@@ -1126,8 +1126,7 @@ private:
     try {
       pSharedCollectInfoManager_.reset(new RSCollectInfoManager());
     } catch (const std::exception &e) {
-      RS_ERROR(pSharedNode_,
-               "Malloc Collect Info Manager Failed !");
+      RS_ERROR(pSharedNode_, "Malloc Collect Info Manager Failed !");
       return -7;
     }
 
@@ -1135,7 +1134,7 @@ private:
         pSharedGlobalConfig_, pSharedNode_, is_init_next_clip_);
     if (ret != 0) {
       RS_ERROR_STREAM(pSharedNode_,
-                          "Initial Collect Info Manager Failed: ret = " << ret);
+                      "Initial Collect Info Manager Failed: ret = " << ret);
       return -8;
     }
 
@@ -1147,8 +1146,7 @@ private:
           new std::thread(&RSRecordClipManager::writeWorkThread, this));
     } catch (const std::exception &e) {
       is_writer_running_ = false;
-      RS_ERROR(pSharedNode_,
-               "Create Write Work Thread Failed !");
+      RS_ERROR(pSharedNode_, "Create Write Work Thread Failed !");
       return -9;
     }
 
@@ -1157,11 +1155,10 @@ private:
         clipDirPath_ + "/" + RS_RECORD_CHECK_YAML_NAME;
     ret = initRecordFileCheckManager(record_file_check_yaml_file_path);
     if (ret != 0) {
-      RS_ERROR_STREAM(pSharedNode_,
-                          "Initial Record File Check Manager Failed: "
-                          "record_file_check_yaml_file_path = "
-                              << record_file_check_yaml_file_path
-                              << ", ret = " << ret);
+      RS_ERROR_STREAM(pSharedNode_, "Initial Record File Check Manager Failed: "
+                                    "record_file_check_yaml_file_path = "
+                                        << record_file_check_yaml_file_path
+                                        << ", ret = " << ret);
       return -10;
     }
 
@@ -1202,9 +1199,9 @@ private:
       }
       if (!is_writer_running_ && isFirstExitWarn) {
         RS_WARN_STREAM(pSharedNode_,
-                           "is_writer_running_ = " << is_writer_running_
-                                                   << ", Write Buffer Size = "
-                                                   << buffer_.size());
+                       "is_writer_running_ = " << is_writer_running_
+                                               << ", Write Buffer Size = "
+                                               << buffer_.size());
         isFirstExitWarn = false;
       }
       int ret = writeMessage(singleMessagePtr);
@@ -1285,9 +1282,9 @@ private:
          ++iterMap) {
       const auto &buffer = iterMap->second;
       RS_INFO_STREAM(pSharedNode_,
-                         "topic_name: " << iterMap->first
-                                        << ", Camera H265 Buffer Size: "
-                                        << buffer.size());
+                     "topic_name: " << iterMap->first
+                                    << ", Camera H265 Buffer Size: "
+                                    << buffer.size());
       for (auto iter = buffer.begin(); iter != buffer.end(); ++iter) {
         if (*iter) {
           buffers[(*iter)->message_time_] = *iter;
@@ -1302,21 +1299,21 @@ private:
         if (singleMessagePtr->message_) {
           // 解析相机消息判断I帧
           RsCompressedImagePtr compressImagePtr;
-          if (!this->deserializeMessage(
-                  singleMessagePtr->message_, compressImagePtr)) {
+          if (!this->deserializeMessage(singleMessagePtr->message_,
+                                        compressImagePtr)) {
             RS_ERROR_STREAM(pSharedNode_,
                             "Parse Camera H265 Message Failed: topic_name = "
                                 << singleMessagePtr->topic_name_);
             return -1;
           }
-          compressImagePtr->attach_type =
-              RsCompressedImage::CLIP_NOT_BELONG;
+          compressImagePtr->attach_type = RsCompressedImage::CLIP_NOT_BELONG;
           singleMessagePtr->message_.reset();
-          if (!this->serializeMessage(
-                  compressImagePtr, singleMessagePtr->message_)) {
-            RS_ERROR_STREAM(pSharedNode_,
-                            "Re-Seralize Camera H265 Message Failed: topic_name = "
-                                << singleMessagePtr->topic_name_);
+          if (!this->serializeMessage(compressImagePtr,
+                                      singleMessagePtr->message_)) {
+            RS_ERROR_STREAM(
+                pSharedNode_,
+                "Re-Seralize Camera H265 Message Failed: topic_name = "
+                    << singleMessagePtr->topic_name_);
             return -2;
           }
         }
@@ -1356,16 +1353,15 @@ private:
 
         auto &buffer = iterMap->second;
         RsCompressedImagePtr compressImagePtr;
-        if (!this->deserializeMessage(
-                singleMessagePtr->message_, compressImagePtr)) {
-          RS_ERROR_STREAM(pSharedNode_,
-                          "Parse Camera H265 Message Failed: topic_name = "
-                              << topic_name);
+        if (!this->deserializeMessage(singleMessagePtr->message_,
+                                      compressImagePtr)) {
+          RS_ERROR_STREAM(
+              pSharedNode_,
+              "Parse Camera H265 Message Failed: topic_name = " << topic_name);
           return -1;
         }
 
-        if (compressImagePtr->type ==
-            RsCompressedImage::H265_I) {
+        if (compressImagePtr->type == RsCompressedImage::H265_I) {
           buffer.clear();
           isH265IFrame = true;
         }
@@ -1375,8 +1371,7 @@ private:
 
         buffer.push_back(copyMessagePtr);
       } else {
-        RS_ERROR(pSharedNode_,
-                 "singleMessagePtr->message_ is Nullptr !");
+        RS_ERROR(pSharedNode_, "singleMessagePtr->message_ is Nullptr !");
         return -2;
       }
     } else {
@@ -1404,9 +1399,8 @@ private:
                         std::ios_base::out | std::ios_base::binary);
     if (!ofstr.is_open()) {
       RS_ERROR_STREAM(pSharedNode_,
-                          "Open Timestamp Record File = "
-                              << timestampRecordFilePath
-                              << " To Write Failed !");
+                      "Open Timestamp Record File = " << timestampRecordFilePath
+                                                      << " To Write Failed !");
       return -1;
     }
 
@@ -1429,9 +1423,10 @@ private:
 
     ofstr << emitter.c_str() << std::endl;
 
-    RS_INFO_STREAM(pSharedNode_,
-                   "Write RSChannelTimestamp Successed, timestampRecordFilePath = "
-                       << timestampRecordFilePath);
+    RS_INFO_STREAM(
+        pSharedNode_,
+        "Write RSChannelTimestamp Successed, timestampRecordFilePath = "
+            << timestampRecordFilePath);
 
     return 0;
   }
@@ -1441,12 +1436,12 @@ private:
         pSharedGlobalConfig_->updateTaskNameMetaFileOpInfo(op, clipDirPath_);
     if (ret == 0) {
       RS_INFO_STREAM(pSharedNode_,
-                         "Update TaskName MetaFile Op Info Successed => Op: "
-                             << op << " => clipDirPath = " << clipDirPath_);
+                     "Update TaskName MetaFile Op Info Successed => Op: "
+                         << op << " => clipDirPath = " << clipDirPath_);
     } else {
       RS_ERROR_STREAM(pSharedNode_,
-                          "Update TaskName MetaFile Op Info Failed => Op: "
-                              << op << " => clipDirPath = " << clipDirPath_);
+                      "Update TaskName MetaFile Op Info Failed => Op: "
+                          << op << " => clipDirPath = " << clipDirPath_);
     }
     return ret;
   }
@@ -1456,24 +1451,22 @@ private:
     try {
       record_file_check_manager_ptr_.reset(new RSRecordFileCheckManager());
     } catch (...) {
-      RS_ERROR(pSharedNode_,
-               "Malloc Record File Check Manager Failed !");
+      RS_ERROR(pSharedNode_, "Malloc Record File Check Manager Failed !");
       return -1;
     }
 
     int ret = record_file_check_manager_ptr_->init(pSharedNode_,
                                                    record_file_check_yaml_path);
     if (ret != 0) {
-      RS_ERROR_STREAM(pSharedNode_,
-                          "Record File Check Manager Initial Failed: "
-                          "record_file_check_yaml_path = "
-                              << record_file_check_yaml_path
-                              << ", ret = " << ret);
+      RS_ERROR_STREAM(pSharedNode_, "Record File Check Manager Initial Failed: "
+                                    "record_file_check_yaml_path = "
+                                        << record_file_check_yaml_path
+                                        << ", ret = " << ret);
     } else {
       RS_INFO_STREAM(pSharedNode_,
-                         "Record File Check Manager Initial Successed: "
-                         "record_file_check_yaml_path = "
-                             << record_file_check_yaml_path);
+                     "Record File Check Manager Initial Successed: "
+                     "record_file_check_yaml_path = "
+                         << record_file_check_yaml_path);
     }
 
     return 0;
@@ -1481,8 +1474,7 @@ private:
 
   int addRecordFileCheckManager() {
     if (record_file_check_manager_ptr_ == nullptr) {
-      RS_ERROR(pSharedNode_,
-               "record_file_check_manager_ptr_ is Nullptr !");
+      RS_ERROR(pSharedNode_, "record_file_check_manager_ptr_ is Nullptr !");
       return -1;
     }
 
@@ -1504,12 +1496,11 @@ private:
           record_file_path, record_clip_rel_dir_name);
 
       if (ret != 0) {
-        RS_ERROR_STREAM(pSharedNode_,
-                            "Record Check Manager Add Record File "
-                            "Path Failed: record_file_path = "
-                                << record_file_path
-                                << ", record_clip_rel_dir_name = "
-                                << record_clip_rel_dir_name);
+        RS_ERROR_STREAM(pSharedNode_, "Record Check Manager Add Record File "
+                                      "Path Failed: record_file_path = "
+                                          << record_file_path
+                                          << ", record_clip_rel_dir_name = "
+                                          << record_clip_rel_dir_name);
         return -2;
       }
     }
@@ -1539,8 +1530,7 @@ private:
 
   int writeRecordFileCheck() {
     if (record_file_check_manager_ptr_ == nullptr) {
-      RS_ERROR(pSharedNode_,
-               "record_file_check_manager_ptr_ is Nullptr !");
+      RS_ERROR(pSharedNode_, "record_file_check_manager_ptr_ is Nullptr !");
       return -1;
     }
 
@@ -1554,11 +1544,11 @@ private:
           record_file_path, is_complete, is_zero_message_cnt);
       if (ret != 0) {
         RS_ERROR_STREAM(pSharedNode_,
-                            "Set record_file_path = "
-                                << record_file_path
-                                << " Check Info Failed: is_complete = "
-                                << is_complete << ", is_zero_message_cnt = "
-                                << is_zero_message_cnt << ", ret = " << ret);
+                        "Set record_file_path = "
+                            << record_file_path
+                            << " Check Info Failed: is_complete = "
+                            << is_complete << ", is_zero_message_cnt = "
+                            << is_zero_message_cnt << ", ret = " << ret);
         return -2;
       }
     }
@@ -1566,46 +1556,45 @@ private:
     int ret = record_file_check_manager_ptr_->writeRecordCheckInfo();
     if (ret != 0) {
       RS_ERROR_STREAM(pSharedNode_,
-                          "Record File Check Manager Write Failed: ret = "
-                              << ret);
+                      "Record File Check Manager Write Failed: ret = " << ret);
       return -3;
     } else {
-      RS_INFO(pSharedNode_,
-              "Record File Check Manager Write Successed !");
+      RS_INFO(pSharedNode_, "Record File Check Manager Write Successed !");
     }
 
     return 0;
   }
 
   template <typename MessageT>
-  bool deserializeMessage(
-      const SerializedMessagePtr &serialized_msg,
-      MessageT &msg) {
+  bool deserializeMessage(const SerializedMessagePtr &serialized_msg,
+                          MessageT &msg) {
 #if __ROS2__
     if (msg == nullptr) {
       msg.reset(new typename MessageT::element_type());
     }
 
-    static auto serializer = rclcpp::Serialization<typename MessageT::element_type>();
+    static auto serializer =
+        rclcpp::Serialization<typename MessageT::element_type>();
     serializer.deserialize_message(serialized_msg.get(), msg.get());
 #elif __ROS1__
-    msg = serialized_msg->template instantiate<typename MessageT::element_type>();
+    msg =
+        serialized_msg->template instantiate<typename MessageT::element_type>();
 #endif
 
     return true;
   }
 
   template <typename MessageT>
-  bool
-  serializeMessage(const MessageT &msg,
-                   SerializedMessagePtr &serialized_msg) {
+  bool serializeMessage(const MessageT &msg,
+                        SerializedMessagePtr &serialized_msg) {
 #if __ROS2__
     if (serialized_msg == nullptr) {
       serialized_msg.reset(new rclcpp::SerializedMessage());
     }
     serialized_msg->reserve(2 * 1024 * 1024);
 
-    static auto serializer = rclcpp::Serialization<typename MessageT::element_type>();
+    static auto serializer =
+        rclcpp::Serialization<typename MessageT::element_type>();
     serializer.serialize_message(msg.get(), serialized_msg.get());
 #elif __ROS1__
     size_t length = ros::serialization::serializationLength(*msg);
@@ -1615,9 +1604,12 @@ private:
 
     ros::serialization::serialize(stream, *msg);
 
-    std::string md5 = ros::message_traits::MD5Sum<typename MessageT::element_type>::value();
-    std::string datatype = ros::message_traits::DataType<typename MessageT::element_type>::value();
-    std::string msg_def = ros::message_traits::Definition<typename MessageT::element_type>::value();
+    std::string md5 =
+        ros::message_traits::MD5Sum<typename MessageT::element_type>::value();
+    std::string datatype =
+        ros::message_traits::DataType<typename MessageT::element_type>::value();
+    std::string msg_def = ros::message_traits::Definition<
+        typename MessageT::element_type>::value();
     std::string latching = "0";
 
     serialized_msg->morph(md5, datatype, msg_def, latching);
@@ -1636,7 +1628,8 @@ public:
 #if __ROS1__
   std::unordered_map<std::string, rosbag::ConnectionInfo> topicMetaDataMapper_;
 #elif __ROS2__
-  std::unordered_map<std::string, rosbag2_storage::TopicMetadata> topicMetaDataMapper_;
+  std::unordered_map<std::string, rosbag2_storage::TopicMetadata>
+      topicMetaDataMapper_;
 #endif
   std::map<std::string, std::set<std::string>> clipRelDirToRecordPathMapper_;
   RS_RECORD_IO_ERROR_CALLBACK errorCallback_;

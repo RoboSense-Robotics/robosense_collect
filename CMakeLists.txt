@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(ros2_collect)
+project(robosense_collect)
 
 # Default to C99
 if(NOT CMAKE_C_STANDARD)

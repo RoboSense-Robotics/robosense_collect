@@ -1,6 +1,6 @@
 /************************************************************
  * Copyright 2025 RoboSense Technology Co., Ltd
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
 ***************************************************************/
 #include "modules/rs_collect/rscollectmanager.h"
 
@@ -35,7 +35,8 @@ public:
 #elif __ROS1__
   RSCollectNode(const std::string &nodeName) : nodeHandle_(nodeName) {
     ros::NodeHandle privateHandle("~");
-    privateHandle.param<std::string>("collect_config_path", configFilePath_, "");
+    privateHandle.param<std::string>("collect_config_path", configFilePath_,
+                                     "");
   }
 #endif
 
@@ -43,9 +44,9 @@ public:
   int init() {
     YAML::Node configNode;
 #if __ROS2__
-    auto ref = dynamic_cast<rclcpp::Node*>(this);
+    auto ref = dynamic_cast<rclcpp::Node *>(this);
 #elif __ROS1__
-    auto& ref = nodeHandle_;
+    auto &ref = nodeHandle_;
 #endif
 
     try {
@@ -53,15 +54,28 @@ public:
     } catch (...) {
       // std::cerr << "Load Config File Path Failed !" << std::endl;
       RS_ERROR_STREAM(ref,
-                          "Load Config File = " << configFilePath_
-                                                << " Failed !");
+                      "Load Config File = " << configFilePath_ << " Failed !");
       return -1;
     }
 
+    std::string template_meta_directory_path =
+        configNode["recordmetaconfig"]["template_meta_directory_path"]
+            .as<std::string>();
+    if (template_meta_directory_path ==
+        "$(find robosense_collect)/DEFAULT_CONFIG/META/") {
+      const std::string &key_words = "conf/collect.yaml";
+      template_meta_directory_path =
+          configFilePath_.substr(0, configFilePath_.size() - key_words.size()) +
+          "/META/";
+      configNode["recordmetaconfig"]["template_meta_directory_path"] =
+          template_meta_directory_path;
+      RS_INFO_STREAM(ref, "Force Update template_meta_directory_path = "
+                              << template_meta_directory_path);
+    }
+
     // std::cerr << "Load Config File Path Successed !" << std::endl;
-    RS_ERROR_STREAM(ref,
-                       "Load Config File = " << configFilePath_
-                                             << " Successed !");
+    RS_INFO_STREAM(ref,
+                   "Load Config File = " << configFilePath_ << " Successed !");
 
     try {
 #if __ROS2__
@@ -75,38 +89,32 @@ public:
 #endif
     } catch (...) {
       // std::cerr << "Malloc CollectManager Failed !" << std::endl;
-      RS_ERROR_STREAM(ref,
-                       "Malloc RSCollectManager Instance Failed !");
+      RS_ERROR_STREAM(ref, "Malloc RSCollectManager Instance Failed !");
       return -2;
     }
 
     // std::cerr << "Malloc CollectManager Successed !" << std::endl;
-    RS_INFO_STREAM(ref,
-                "Malloc RSCollectManager Instance Successed !");
+    RS_INFO_STREAM(ref, "Malloc RSCollectManager Instance Successed !");
 
     bool isSuccess = collectManagerPtr_->Init();
     if (!isSuccess) {
       // std::cerr << "Collect Manager Initial Failed !" << std::endl;
-      RS_ERROR_STREAM(ref,
-                       "RSCollectManager Instance Initial Failed !");
+      RS_ERROR_STREAM(ref, "RSCollectManager Instance Initial Failed !");
       return -3;
     }
 
     // std::cerr << "Collect Manager Initial Successed !" << std::endl;
-    RS_INFO_STREAM(ref,
-                "RSCollectManager Instance Initial Successed !");
+    RS_INFO_STREAM(ref, "RSCollectManager Instance Initial Successed !");
 
     isSuccess = collectManagerPtr_->Start();
     if (!isSuccess) {
       // std::cerr << "Collect Manager Start Failed !" << std::endl;
-      RS_ERROR_STREAM(ref,
-                       "RSCollectManager Instance Start Failed !");
+      RS_ERROR_STREAM(ref, "RSCollectManager Instance Start Failed !");
       return -4;
     }
 
     // std::cerr << "Collect Manager Start Successed !" << std::endl;
-    RS_INFO_STREAM(ref,
-                "RSCollectManager Instance Start Successed !");
+    RS_INFO_STREAM(ref, "RSCollectManager Instance Start Successed !");
 
     return 0;
   }

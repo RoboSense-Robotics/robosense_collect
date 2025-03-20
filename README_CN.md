@@ -1,95 +1,153 @@
-# ros2_collect 
+# robosense_collect 
 
 [README](./README.md)|[中文文档](README_CN.md)
 
 ## 1. 简介
 
-​	为了能够采集超级传感器以及超级传感器ROS2 SDK的数据，所以开发了基于YAML文件配置的**ros2_collect**节点实现数据采集功能； 该采集节点支持如下功能: 
+​	为了能够采集超级传感器以及超级传感器SDK的数据，所以开发了基于YAML文件配置的**robosense_collect**节点实现数据采集功能；**该采集节点通过在编译时检查系统中ROS环境自动编译为ROS/ROS2版本节点**，如下ROS/ROS2节点支持功能简单介绍：  
 
-- 基于时间自动分段/不分段两种模式
+- ROS节点时支持如下功能: 
+  - 基于时间自动分段/不分段两种模式
+  - 支持bag格式
 
-- 支持.db3 和.mcap格式两种格式
+- ROS2节点时支持如下功能
+  - 基于时间自动分段/不分段两种模式
+  - 支持.db3 和.mcap格式两种格式
+  - 支持zstd压缩和非压缩两种模式
 
-- 支持zstd压缩和非压缩两种模式
-
-  关于**ros2_collect**节点的配置，详细见**第5节配置说明**
+关于**robosense_collect**节点的配置，详细见**第5节配置说明**
 
 
 
 ## 2. 前置依赖
 
-- 安装 Ros2 **humble** 或其他可支持的版本版本: 根据您的操作系统选择 [官方教程](https://fishros.org/doc/ros2/humble/Installation.html) 中的指定内容进行执行
+### 2.1 编译ROS版本节点前置依赖
 
-- 编译安装前置依赖包 **robosense_msgs**:
+- 安装ROS noetic 或其他可支持的版本： 根据您的操作系统选择 [官方教程](http://wiki.ros.org/ROS/Installation) 中的指定内容进行执行
+
+- 编译安装前置依赖包robosense_msgs: 
 
   - 从我们的开放代码仓库拉取源码
 
     ```bash
-    # https
-    git clone http://gitlab.robosense.cn/super_sensor_sdk/ros2_sdk/sdk_infra.git
-    # 或者 ssh
-    git clone git@gitlab.robosense.cn:super_sensor_sdk/ros2_sdk/sdk_infra.git
+    git clone https://github.com/RoboSense-Robotics/robosense_ac_ros_sdk_infra.git
     ```
 
-  - 通过 `colcon` 工具进行编译安装
+  - 通过 `catkin_make` 工具进行编译安装
 
     ```bash
-    colcon build --symlink-install --packages-select robosense_msgs
+    catkin_make --only-pkt-with-deps robosense_msgs
     ```
 
   - 更新工作空间中的 ROS 包元信息
 
     ```bash
-    source install/setup.bash
+    source devel/setup.bash 或 source devel/setup.zsh 
     ```
 
-- 使用 `rosdep` 工具安装 `package.xml` 中定义的依赖
+  - 使用 `rosdep` 工具安装 `package.xml` 中定义的依赖
+
+    ```sh
+    rosdep install -y --from-paths /PATH/TO/ROBOSENSE_COLLECT --ignore-src
+    ```
+
+### 2.2 编译ROS2版本节点前置依赖
+
+- 安装 ROS2 **humble** 或其他可支持的版本: 根据您的操作系统选择 [官方教程](https://fishros.org/doc/ros2/humble/Installation.html) 中的指定内容进行执行
+
+- 编译安装前置依赖包 **robosense_msgs**:
+
+  - 从我们的开放代码仓库拉取源码
 
   ```bash
-  rosdep install -y --from-paths /PATH/TO/RS_COLLECT --ignore-src
+  git clone https://github.com/RoboSense-Robotics/robosense_ac_ros2_sdk_infra.git
+  ```
+
+  - 通过 `colcon` 工具进行编译安装
+
+  ```bash
+  colcon build --symlink-install --packages-select robosense_msgs
+  ```
+
+  - 更新工作空间中的 ROS 包元信息
+
+  ```bash
+  source install/setup.bash 或 source install/setup.zsh 
+  ```
+
+  - 使用 `rosdep` 工具安装 `package.xml` 中定义的依赖
+
+  ```sh
+  rosdep install -y --from-paths /PATH/TO/ROBOSENSE_COLLECT --ignore-src
   ```
 
 
 
-## 3. 编译ros2_collect
+## 3. 编译robosense_collect
 
-- 步骤1: 打开终端切换工作路径到包含**ros2_collect**包的路径
+### 3.1 编译ROS版本节点 
+
+- 步骤1: 打开终端切换工作路径到包含**robosense_collect**包的路径
 
 - 步骤2: 执行ROS2包编译命令: 
 
   ```shell
-  colcon build --symlink-install --packages-select ros2_collect
+  catkin_make --only-pkt-with-deps robosense_collect
   ```
 
-  等待编译完成即可 
+等待编译完成即可 
 
+### 3.2 编译ROS2版本节点
 
+- 步骤1: 打开终端切换工作路径到包含**robosense_collect**包的路径
 
-## 4. 运行ros2_collect
+- 步骤2: 执行ROS2包编译命令: 
 
-- 步骤1: 对于编译好的包，执行source命令设置节点运行环境: 对于bash解释器终端和zsh解释器终端，分别运行如下对应命令
+  ```shell
+  colcon build --symlink-install --packages-select robosense_collect
+  ```
 
-  - ```sh
-    source install/setup.bash 
-    ```
+等待编译完成即可 
 
-  - ```shell
-    source install/setup.zsh 
-    ```
+## 4. 运行robosense_collect
+
+### 4.1 运行ROS版本节点
+
+- 步骤1：对于编译好的包，执行source命令设置节点运行环境: 对于bash解释器终端和zsh解析器终端分别运行如下对应命令
+
+  ```shell
+  source devel/setup.bash 
+  ```
+
+- 步骤2： 启动节点: 
+
+  ```shell
+  roslaunch robosense_collect robosense_collect.launch 
+  ```
+
+节点启动后，即自动开始数据采集到指定的目录。 
+
+### 4.2 运行ROS2版本节点
+
+- 步骤1: 对编译好的包，执行source命令设置节点运行环境: 
+
+  ```sh
+  source install/setup.bash 或 source install/setup.zsh 
+  ```
 
 - 步骤2: 启动节点: 
 
-  ```sh
-  ros2 launch ros2_collect ros2_collect.launch.py
+  ```shell
+  ros2 launch robosense_collect robosense_collect.launch.py
   ```
 
-  节点启动后，即自动开始数据采集到指定的目录。 
+节点启动后，即自动开始数据采集到指定的目录。 
 
-  **注意: 如果在编译节点后，需要修改配置文件，那么，在修改完成后需要再次编译包以使配置文件能够生效。** 
+**注意: 如果在编译节点后，需要修改配置文件，那么，在修改完成后需要再次编译包以使配置文件能够生效。** 
 
 ## 5.  配置文件字段说明 
 
-​	 **ros2_collect**的配置文件在包的相对路径为: **DEFAULT_CONFIG/conf/collect.yaml**，该节点中包含默认的配置，使用者根据自己数据采集的需要进行配置拓展，**特别是下表中标记为黑色粗体的字段**
+​	 **robosense_collect**的配置文件在包的相对路径为: **DEFAULT_CONFIG/conf/collect.yaml**，该节点中包含默认的配置，使用者根据自己数据采集的需要进行配置拓展，**特别是下表中标记为黑色粗体的字段**
 
 | 一级字段名称           | 二级字段名称                      | 三级字段名称         | 类型     | 说明                                                         |
 | ---------------------- | --------------------------------- | -------------------- | -------- | ------------------------------------------------------------ |
@@ -120,7 +178,7 @@
 |                        | enable_collect_freespace_monitor  |                      | bool     | 是否进行保存硬盘空间检查                                     |
 |                        | collect_freespace_min_gbyte       |                      | uint32_t | 保存硬盘最小可用空间大小，单位GByte                          |
 |                        | enable_collect_disk_mount_monitor |                      | bool     | 是否进行保存路径挂载检查，默认为true                         |
-|                        | collect_disk_write_check_modes    |                      | string[] | 进行保存硬盘读写属性检查，支持“RS_COLLECT_DISK_WRITE_CHECK_USR”，“RS_COLLECT_DISK_WRITE_CHECK_OTH”, "RS_COLLECT_DISK_WRITE_CHECK_GRP" 默认为"RS_COLLECT_DISK_WRITE_CHECK_USR"，表示对当前用户检查是否有读写权限 |
+|                        | collect_disk_write_check_modes    |                      | string[] | 进行保存硬盘读写属性检查，支持“robosense_collect_DISK_WRITE_CHECK_USR”，“robosense_collect_DISK_WRITE_CHECK_OTH”, "robosense_collect_DISK_WRITE_CHECK_GRP" 默认为"robosense_collect_DISK_WRITE_CHECK_USR"，表示对当前用户检查是否有读写权限 |
 |                        | enable_disk_mount_retry_debug     |                      | bool     | 是否进行硬盘重新挂载调试，默认为false                        |
 |                        | enable_disk_mount_retry           |                      | bool     | 当检查到硬盘umount后，是否进行重新挂载                       |
 |                        | max_disk_mount_retry_cnt          |                      | uint32_t | 当检查到硬盘umount后，进行重新挂载尝试的次数                 |

@@ -1,12 +1,12 @@
 <launch>
   <!-- 配置文件路径设置 -->
-  <arg name="config_file" default="$(find ros2_collect)/DEFAULT_CONFIG/conf/collect.yaml" />
+  <arg name="config_file" default="$(find robosense_collect)/DEFAULT_CONFIG/conf/collect.yaml" />
   
   <!-- 节点输出模式设置 -->
   <arg name="output" default="screen" />
   
   <!-- 启动ROS1采集节点 -->
-  <node pkg="ros2_collect" type="ros2_collect" name="ros2_collect" output="$(arg output)">
+  <node pkg="robosense_collect" type="robosense_collect" name="robosense_collect" output="$(arg output)">
     <param name="collect_config_path" value="$(arg config_file)" />
   </node>
 </launch>

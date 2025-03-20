@@ -12,7 +12,7 @@ recordsensorconfig:
           enable_timeout_check: false
           timeout_warn_th_ms: 300
           timeout_error_th_ms: 500
-        - sensor_type: "RS_RECORD_DATA_H265"
+        - sensor_type: "RS_RECORD_DATA_ANY" # "RS_RECORD_DATA_H265"
           enable_topic: true
           topic_name: "/rs_camera/compressed"
           clip_rel_directory: ""
@@ -51,7 +51,7 @@ recorddataconfig:
     compression_thread_cnt: 1
     compression_exclude_records:
         - clip_rel_directory: ""
-          record_file_name: "datas"
+          record_file_name: "datas_test"
     enable_clip_erase_timeout_debug: false
     clip_erase_timeout_debug_count: 0
     rdcs_root_directory_path: "/tmp/RDCS_ROOT/"
@@ -65,7 +65,7 @@ recorddataconfig:
     max_disk_mount_retry_cnt: 2
     encoder_type: H265
 recordmetaconfig:
-    template_meta_directory_path: "/media/sti/ee28dfb8-da74-4739-88ab-b2b836e8b78c/super_workspace/super_sensor_sdk_ros2/modules/ros2_collect/DEFAULT_CONFIG/META/"
+    template_meta_directory_path: "$(find robosense_collect)/DEFAULT_CONFIG/META/"
 recordsystemconfig:
     vehicle_id: "LNABLAB38N5508070" # lixiang one 001
     clip_id: 0
