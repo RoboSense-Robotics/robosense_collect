@@ -138,7 +138,7 @@
 - 步骤2: 启动节点: 
 
   ```shell
-  ros2 launch robosense_collect robosense_collect.launch.py
+  ros2 launch robosense_collect robosense_collect.py
   ```
 
 节点启动后，即自动开始数据采集到指定的目录。 
